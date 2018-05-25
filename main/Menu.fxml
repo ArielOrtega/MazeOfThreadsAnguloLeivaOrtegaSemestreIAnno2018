@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-image: url(assets/Background.png);" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MenuController">
+   <children>
+      <Label layoutX="481.0" layoutY="54.0" text="The Maze">
+         <font>
+            <Font name="Oswald Medium" size="90.0" />
+         </font>
+         <effect>
+            <DropShadow color="WHITE" height="49.05" radius="18.432499999999997" spread="0.03" width="26.68" />
+         </effect>
+      </Label>
+      <Label fx:id="lbl_nGame" layoutX="103.0" layoutY="307.0" onMouseClicked="#newGameStart" onMouseEntered="#lblNewGame" onMouseExited="#lblNewGameOut" text="New Game" textFill="WHITE">
+         <font>
+            <Font name="Open Sans Bold" size="37.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_options" layoutX="103.0" layoutY="410.0" onMouseEntered="#lblOptions" onMouseExited="#lblOptionsOut" text="Options" textFill="WHITE">
+         <font>
+            <Font name="Open Sans Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_exit" layoutX="103.0" layoutY="529.0" onMouseEntered="#lblExit" onMouseExited="#lblExitOut" text="Exit Game" textFill="WHITE">
+         <font>
+            <Font name="Open Sans Bold" size="21.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

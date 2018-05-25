@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="1000.0" style="-fx-background-color: #667984;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9" fx:controller="Interface.ChooseCharacterController">
+   <children>
+      <Label layoutX="379.0" layoutY="49.0" text="Choose your character" textFill="WHITE">
+         <font>
+            <Font name="Oswald RegularItalic" size="30.0" />
+         </font>
+      </Label>
+      <Separator layoutX="498.0" layoutY="178.0" orientation="VERTICAL" prefHeight="200.0" />
+      <ImageView fitHeight="200.0" fitWidth="230.0" layoutX="149.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="200.0" fitWidth="230.0" layoutX="622.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true" />
+      <RadioButton layoutX="62.0" layoutY="441.0" mnemonicParsing="false" text="Fast" textFill="WHITE">
+         <font>
+            <Font name="Open Sans Bold" size="16.0" />
+         </font>
+      </RadioButton>
+      <RadioButton layoutX="62.0" layoutY="493.0" mnemonicParsing="false" text="Furious" textFill="WHITE">
+         <font>
+            <Font name="Open Sans Bold" size="15.0" />
+         </font>
+      </RadioButton>
+      <RadioButton layoutX="62.0" layoutY="543.0" mnemonicParsing="false" text="Smart" textFill="WHITE">
+         <font>
+            <Font name="Open Sans Bold" size="16.0" />
+         </font>
+      </RadioButton>
+      <RadioButton layoutX="548.0" layoutY="441.0" mnemonicParsing="false" text="Fast" textFill="WHITE">
+         <font>
+            <Font name="Open Sans Bold" size="16.0" />
+         </font>
+      </RadioButton>
+      <RadioButton layoutX="548.0" layoutY="493.0" mnemonicParsing="false" text="Furious" textFill="WHITE">
+         <font>
+            <Font name="Open Sans Bold" size="15.0" />
+         </font>
+      </RadioButton>
+      <RadioButton layoutX="548.0" layoutY="543.0" mnemonicParsing="false" text="Smart" textFill="WHITE">
+         <font>
+            <Font name="Open Sans Bold" size="16.0" />
+         </font>
+      </RadioButton>
+      <ComboBox fx:id="cbx_player1Charact" layoutX="241.0" layoutY="437.0" prefWidth="150.0" />
+      <ComboBox fx:id="cbx_player2Charact" layoutX="737.0" layoutY="437.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>
