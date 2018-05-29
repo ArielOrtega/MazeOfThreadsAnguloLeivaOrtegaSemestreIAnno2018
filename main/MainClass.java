@@ -29,6 +29,7 @@ public class MainClass extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("/Interface/Maze.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.initStyle(StageStyle.UNDECORATED);
