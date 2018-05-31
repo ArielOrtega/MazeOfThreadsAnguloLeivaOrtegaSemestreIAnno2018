@@ -3,8 +3,8 @@
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interface.MazeController">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interface.MazeController">
    <children>
-      <Canvas fx:id="canvas_maze" height="600.0" layoutX="58.0" layoutY="40.0" width="600.0" />
+      <Canvas fx:id="canvas_maze" height="715.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#handleClick" width="770.0" />
    </children>
 </AnchorPane>
