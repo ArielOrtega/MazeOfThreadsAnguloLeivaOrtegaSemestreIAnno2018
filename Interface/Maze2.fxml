@@ -5,10 +5,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interface.MazeController">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interface.Maze2Controller">
    <children>
-      <Canvas fx:id="canvas_maze" height="715.0" layoutX="239.0" layoutY="14.0" onMouseClicked="#handleClick" width="770.0" />
-      <AnchorPane layoutX="24.0" layoutY="25.0" prefHeight="219.0" prefWidth="123.0">
+      <Canvas fx:id="canvas_maze" height="715.0" layoutX="242.0" layoutY="5.0" onMouseClicked="#handleClick" width="770.0" />
+      <AnchorPane layoutX="21.0" layoutY="16.0" prefHeight="219.0" prefWidth="123.0">
          <children>
             <Label fx:id="lb_goBack" layoutX="21.0" layoutY="14.0" onMouseClicked="#goBackAction" prefHeight="29.0" prefWidth="82.0" text="Volver">
                <font>

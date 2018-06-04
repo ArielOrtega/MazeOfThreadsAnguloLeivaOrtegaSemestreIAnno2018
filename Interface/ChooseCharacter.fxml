@@ -4,52 +4,108 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="1000.0" style="-fx-background-color: #667984;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9" fx:controller="Interface.ChooseCharacterController">
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="1000.0" style="-fx-background-color: #667984;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interface.ChooseCharacterController">
    <children>
-      <Label layoutX="379.0" layoutY="49.0" text="Choose your character" textFill="WHITE">
+      <Label layoutX="138.0" layoutY="27.0" text="Choose your character" textFill="WHITE">
          <font>
             <Font name="Oswald RegularItalic" size="30.0" />
          </font>
       </Label>
-      <Separator layoutX="498.0" layoutY="178.0" orientation="VERTICAL" prefHeight="200.0" />
-      <ImageView fitHeight="200.0" fitWidth="230.0" layoutX="149.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fitHeight="200.0" fitWidth="230.0" layoutX="622.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true" />
-      <RadioButton layoutX="62.0" layoutY="441.0" mnemonicParsing="false" text="Fast" textFill="WHITE">
+      <Separator layoutX="313.0" layoutY="92.0" orientation="VERTICAL" prefHeight="200.0" />
+      <ImageView fx:id="iv_player1" fitHeight="200.0" fitWidth="230.0" layoutX="51.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="iv_player2" fitHeight="200.0" fitWidth="230.0" layoutX="350.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true" />
+      <AnchorPane fx:id="cb_furious" layoutX="43.0" layoutY="337.0" prefHeight="236.0" prefWidth="252.0">
+         <children>
+            <RadioButton fx:id="p1_fast" layoutX="17.0" layoutY="60.0" mnemonicParsing="false" text="Fast" textFill="WHITE">
+               <font>
+                  <Font name="Open Sans Bold" size="16.0" />
+               </font>
+            </RadioButton>
+            <RadioButton fx:id="p1_furious" layoutX="17.0" layoutY="108.0" mnemonicParsing="false" text="Furious" textFill="WHITE">
+               <font>
+                  <Font name="Open Sans Bold" size="15.0" />
+               </font>
+            </RadioButton>
+            <RadioButton fx:id="p1_smart" layoutX="18.0" layoutY="154.0" mnemonicParsing="false" text="Smart" textFill="WHITE">
+               <font>
+                  <Font name="Open Sans Bold" size="16.0" />
+               </font>
+            </RadioButton>
+            <ComboBox fx:id="cbx_player1Charact" layoutX="13.0" layoutY="17.0" prefWidth="150.0" />
+            <Label layoutX="89.0" layoutY="190.0" prefHeight="32.0" prefWidth="76.0" text="Quantity" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutX="309.0" layoutY="3.0" prefHeight="236.0" prefWidth="252.0">
+               <children>
+                  <Label layoutX="92.0" layoutY="187.0" prefHeight="32.0" prefWidth="76.0" text="Quantity" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="cbx_player2Charact" layoutX="17.0" layoutY="15.0" prefWidth="150.0" />
+                  <RadioButton fx:id="p2_fast" layoutX="20.0" layoutY="58.0" mnemonicParsing="false" text="Fast" textFill="WHITE">
+                     <font>
+                        <Font name="Open Sans Bold" size="16.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="p2_furious" layoutX="20.0" layoutY="105.0" mnemonicParsing="false" text="Furious" textFill="WHITE">
+                     <font>
+                        <Font name="Open Sans Bold" size="15.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="p2_smart" layoutX="22.0" layoutY="150.0" mnemonicParsing="false" text="Smart" textFill="WHITE">
+                     <font>
+                        <Font name="Open Sans Bold" size="16.0" />
+                     </font>
+                  </RadioButton>
+                  <Spinner fx:id="p2_qty" editable="true" layoutX="24.0" layoutY="190.0" prefHeight="25.0" prefWidth="47.0" />
+               </children>
+            </AnchorPane>
+            <Spinner fx:id="p1_qty" layoutX="19.0" layoutY="195.0" prefHeight="25.0" prefWidth="47.0" />
+         </children>
+      </AnchorPane>
+      <Label layoutX="706.0" layoutY="27.0" text="Choose a maze" textFill="WHITE">
          <font>
-            <Font name="Open Sans Bold" size="16.0" />
+            <Font name="Oswald RegularItalic" size="30.0" />
          </font>
-      </RadioButton>
-      <RadioButton layoutX="62.0" layoutY="493.0" mnemonicParsing="false" text="Furious" textFill="WHITE">
+      </Label>
+      <AnchorPane layoutX="707.0" layoutY="338.0" prefHeight="236.0" prefWidth="252.0">
+         <children>
+            <RadioButton fx:id="m_easy" layoutX="20.0" layoutY="61.0" mnemonicParsing="false" text="Easy level" textFill="WHITE">
+               <font>
+                  <Font name="Open Sans Bold" size="16.0" />
+               </font>
+            </RadioButton>
+            <RadioButton fx:id="m_medium" layoutX="20.0" layoutY="108.0" mnemonicParsing="false" text="Medium level" textFill="WHITE">
+               <font>
+                  <Font name="Open Sans Bold" size="15.0" />
+               </font>
+            </RadioButton>
+            <RadioButton fx:id="m_hard" layoutX="22.0" layoutY="153.0" mnemonicParsing="false" text="Hard level" textFill="WHITE">
+               <font>
+                  <Font name="Open Sans Bold" size="16.0" />
+               </font>
+            </RadioButton>
+         </children>
+      </AnchorPane>
+      <ImageView fx:id="iv_maze" fitHeight="200.0" fitWidth="230.0" layoutX="706.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true" />
+      <Separator layoutX="639.0" layoutY="92.0" orientation="VERTICAL" prefHeight="200.0" />
+      <Label fx:id="lb_start" layoutX="885.0" layoutY="574.0" onMouseClicked="#initGame" text="Start!" textFill="WHITE">
          <font>
-            <Font name="Open Sans Bold" size="15.0" />
+            <Font size="20.0" />
          </font>
-      </RadioButton>
-      <RadioButton layoutX="62.0" layoutY="543.0" mnemonicParsing="false" text="Smart" textFill="WHITE">
+      </Label>
+      <Label fx:id="lb_excepcion" layoutX="745.0" layoutY="617.0" prefHeight="19.0" prefWidth="252.0" textFill="WHITE">
          <font>
-            <Font name="Open Sans Bold" size="16.0" />
+            <Font size="13.0" />
          </font>
-      </RadioButton>
-      <RadioButton layoutX="548.0" layoutY="441.0" mnemonicParsing="false" text="Fast" textFill="WHITE">
-         <font>
-            <Font name="Open Sans Bold" size="16.0" />
-         </font>
-      </RadioButton>
-      <RadioButton layoutX="548.0" layoutY="493.0" mnemonicParsing="false" text="Furious" textFill="WHITE">
-         <font>
-            <Font name="Open Sans Bold" size="15.0" />
-         </font>
-      </RadioButton>
-      <RadioButton layoutX="548.0" layoutY="543.0" mnemonicParsing="false" text="Smart" textFill="WHITE">
-         <font>
-            <Font name="Open Sans Bold" size="16.0" />
-         </font>
-      </RadioButton>
-      <ComboBox fx:id="cbx_player1Charact" layoutX="241.0" layoutY="437.0" prefWidth="150.0" />
-      <ComboBox fx:id="cbx_player2Charact" layoutX="737.0" layoutY="437.0" prefWidth="150.0" />
+      </Label>
    </children>
 </AnchorPane>

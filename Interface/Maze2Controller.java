@@ -26,7 +26,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class MazeController implements Initializable, Runnable {
+public class Maze2Controller implements Initializable, Runnable {
 
     private Thread thread;
     private Scene scene;
@@ -40,19 +40,19 @@ public class MazeController implements Initializable, Runnable {
     private SmartCharacter saC;
     public static int[][] maze = 
     {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-    {1 ,0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1 ,0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1},
-    {1 ,0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1},
-    {1 ,0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1},
-    {1 ,0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1},
-    {1 ,0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1},
-    {1 ,0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1 ,0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1},
+    {1 ,0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1},
     {1 ,1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
-    {1 ,0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
-    {1 ,0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1},
-    {1 ,0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1},
-    {1 ,1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 9, 1}};
+    {1 ,0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1},
+    {1 ,0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1},
+    {1 ,0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+    {1 ,1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1},
+    {1 ,0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1},
+    {1 ,0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1},
+    {1 ,0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1},
+    {1 ,0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1},
+    {1 ,0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1},
+    {1 ,0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1},
+    {1 ,1, 1, 1, 1, 1, 1, 1, 1, 9, 1, 1, 1}};
     
     public static List<Integer> path = new ArrayList<Integer>();
     private int pathIndex;
@@ -131,7 +131,7 @@ public class MazeController implements Initializable, Runnable {
 //      draw the path list
         SearchPath.searchPath(maze, 1, 1, path);
         pathIndex = path.size() - 2;
-       
+        
         for (int p = 0; p < path.size(); p += 2) {
             int pathX = path.get(p);
             int pathY = path.get(p + 1);
@@ -165,11 +165,12 @@ public class MazeController implements Initializable, Runnable {
 
     @FXML
     private void goBackAction(MouseEvent event) throws IOException {
+        
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("/Interface/ChooseCharacter.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 app_stage.hide(); //optional
                 app_stage.setScene(home_page_scene);
-                app_stage.show();  
+                app_stage.show();         
     }
 }

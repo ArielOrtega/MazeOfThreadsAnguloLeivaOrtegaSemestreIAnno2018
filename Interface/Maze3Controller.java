@@ -2,6 +2,7 @@ package Interface;
 
 import domain.FastCharacter;
 import domain.FuriousCharacter;
+import domain.SearchPath;
 import domain.SmartCharacter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -26,7 +27,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class MazeController implements Initializable, Runnable {
+public class Maze3Controller implements Initializable, Runnable {
 
     private Thread thread;
     private Scene scene;
@@ -39,20 +40,24 @@ public class MazeController implements Initializable, Runnable {
     private FuriousCharacter fuC;
     private SmartCharacter saC;
     public static int[][] maze = 
-    {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+    {{1 ,1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+    {1 ,0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+    {1 ,0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1},
+    {1 ,0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1},
+    {1 ,0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1},
+    {1 ,0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1 ,0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1},
+    {1 ,0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1},
+    {1 ,0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1},
     {1 ,0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1 ,0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1},
-    {1 ,0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1},
-    {1 ,0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1},
-    {1 ,0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1},
-    {1 ,0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1},
-    {1 ,0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1 ,0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1},
-    {1 ,1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
-    {1 ,0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
-    {1 ,0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1},
-    {1 ,0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1},
-    {1 ,1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 9, 1}};
+    {1 ,0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1},
+    {1 ,0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1},
+    {1 ,0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1},
+    {1 ,0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1},
+    {1 ,0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1},
+    {1 ,0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1},
+    {1 ,0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1},
+    {1 ,1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};            
     
     public static List<Integer> path = new ArrayList<Integer>();
     private int pathIndex;
@@ -60,13 +65,15 @@ public class MazeController implements Initializable, Runnable {
 
     @FXML
     private Canvas canvas_maze;
+    
+    //needed
+    ChooseCharacterController control= new ChooseCharacterController();
     @FXML
     private Label lb_goBack;
     @FXML
     private Label lb_goBack1;
     @FXML
     private Label lb_goBack11;
-    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -75,6 +82,7 @@ public class MazeController implements Initializable, Runnable {
             this.canvas = new Canvas(canvas_maze.getWidth(), canvas_maze.getHeight());
             this.image = new Image(new FileInputStream("src/assets/Background.png"));
 
+            
             this.faC = new FastCharacter(600, 50, 0, "braid");
             this.faC.start();
 
@@ -121,28 +129,31 @@ public class MazeController implements Initializable, Runnable {
                 if (maze[i][j] == 0 || maze[i][j] == 2 || maze[i][j] == 9) {
                     gc.setFill(Color.WHITE);
 
-                } else {
-                    gc.setFill(Color.CADETBLUE);
+                } 
+                else {
+                    gc.setFill(Color.CORNFLOWERBLUE);
                 }
                 gc.fillRect(i * 55, j * 55, 55, 55);
             }
         }
-/**
-//      draw the path list
+        
+        /**
+        //draw the path list
         SearchPath.searchPath(maze, 1, 1, path);
         pathIndex = path.size() - 2;
-       
+        
         for (int p = 0; p < path.size(); p += 2) {
             int pathX = path.get(p);
             int pathY = path.get(p + 1);
             gc.fillRect(pathY * 55, pathX * 55, 55, 55);
             gc.setFill(Color.PINK);
         }
-**/
+
         gc.drawImage(this.faC.getImage(), this.faC.getX(), this.faC.getY());
         gc.drawImage(this.fuC.getImage(), this.fuC.getX(), this.fuC.getY());
         gc.drawImage(this.saC.getImage(), this.saC.getX(), this.saC.getY());
-
+        **/
+        
     }
 
     @FXML
@@ -150,10 +161,10 @@ public class MazeController implements Initializable, Runnable {
     private void handleClick(MouseEvent event) {
 
         int xOffset = 0;
-        int xIndex = (int) ((event.getX() - xOffset) / (770 / 14));
+        int xIndex = (int) ((event.getX() - xOffset) / (990 / 18));
         int yOffset = 0;
         int yIndex = (int) ((event.getY() - yOffset) / (715 / 13));
-        //System.out.println("(" + xIndex + " , " + yIndex + ")");
+        System.out.println("(" + xIndex + " , " + yIndex + ")");
 
         if (maze[xIndex][yIndex] == 1) {
             maze[xIndex][yIndex] = 0;
@@ -170,6 +181,6 @@ public class MazeController implements Initializable, Runnable {
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 app_stage.hide(); //optional
                 app_stage.setScene(home_page_scene);
-                app_stage.show();  
+                app_stage.show();          
     }
 }

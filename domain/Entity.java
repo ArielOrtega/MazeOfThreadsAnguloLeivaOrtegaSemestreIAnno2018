@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 
 public class Entity extends Thread{
     
-    //private String name;
+    private String name;
     private int energy;
     private boolean ate;
     private int x;

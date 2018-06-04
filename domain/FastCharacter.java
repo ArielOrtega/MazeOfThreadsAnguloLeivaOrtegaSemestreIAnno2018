@@ -8,16 +8,18 @@ import javafx.scene.image.Image;
 
 
 public class FastCharacter extends Entity {
+    private String name;
 
-    public FastCharacter(int x, int y, int num) throws FileNotFoundException {
+    public FastCharacter(int x, int y, int num, String name) throws FileNotFoundException {
         super(x,y,num);
+        this.name= name;
         setSprite();
     }
     
     public void setSprite() throws FileNotFoundException{
         ArrayList<Image> sprite = super.getSprite();
         for(int i = 1; i < 5; i++){
-            sprite.add(new Image(new FileInputStream("src/assets/braid"+i+".png")));
+            sprite.add(new Image(new FileInputStream("src/assets/"+name+""+i+".png")));
         }
         super.setSprite(sprite);
     }
@@ -44,6 +46,7 @@ public class FastCharacter extends Entity {
                 if(imageNum==4){
                     imageNum=1;
                 }
+                                
             } 
             catch (InterruptedException ex) {}
         }
