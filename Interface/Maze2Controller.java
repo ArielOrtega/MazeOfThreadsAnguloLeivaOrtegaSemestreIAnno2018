@@ -3,6 +3,7 @@ package Interface;
 import domain.FastCharacter;
 import domain.FuriousCharacter;
 import domain.SmartCharacter;
+import domain.SynchronizedBuffer;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -38,24 +39,11 @@ public class Maze2Controller implements Initializable, Runnable {
     private FastCharacter faC;
     private FuriousCharacter fuC;
     private SmartCharacter saC;
-    public static int[][] maze = 
-    {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-    {1 ,0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1},
-    {1 ,1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
-    {1 ,0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1},
-    {1 ,0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1},
-    {1 ,0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
-    {1 ,1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1},
-    {1 ,0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1},
-    {1 ,0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1},
-    {1 ,0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1},
-    {1 ,0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1},
-    {1 ,0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1},
-    {1 ,0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1},
-    {1 ,1, 1, 1, 1, 1, 1, 1, 1, 9, 1, 1, 1}};
+    
     
     public static List<Integer> path = new ArrayList<Integer>();
     private int pathIndex;
+    SynchronizedBuffer synchronizedB = new SynchronizedBuffer();
     
 
     @FXML
@@ -115,10 +103,10 @@ public class Maze2Controller implements Initializable, Runnable {
 
     private void draw(GraphicsContext gc) {
 
-        for (int i = 0; i < maze.length; i++) {
-            for (int j = 0; j < maze[0].length; j++) {
+        for (int i = 0; i < synchronizedB.maze.length; i++) {
+            for (int j = 0; j < synchronizedB.maze[0].length; j++) {
 
-                if (maze[i][j] == 0 || maze[i][j] == 2 || maze[i][j] == 9) {
+                if (synchronizedB.maze[i][j] == 0 || synchronizedB.maze[i][j] == 2 || synchronizedB.maze[i][j] == 9) {
                     gc.setFill(Color.WHITE);
 
                 } else {
@@ -155,10 +143,10 @@ public class Maze2Controller implements Initializable, Runnable {
         int yIndex = (int) ((event.getY() - yOffset) / (715 / 13));
         //System.out.println("(" + xIndex + " , " + yIndex + ")");
 
-        if (maze[xIndex][yIndex] == 1) {
-            maze[xIndex][yIndex] = 0;
+        if (synchronizedB.maze[xIndex][yIndex] == 1) {
+            synchronizedB.maze[xIndex][yIndex] = 0;
         } else {
-            maze[xIndex][yIndex] = 1;
+            synchronizedB.maze[xIndex][yIndex] = 1;
         }
         
     }//end handleClick

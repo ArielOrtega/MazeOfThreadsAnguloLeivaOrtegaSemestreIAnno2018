@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Interface;
 
-import domain.Entity;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -84,8 +78,6 @@ public class ChooseCharacterController implements Initializable {
     @FXML
     private Label lb_excepcion;
     
-    private Entity[] charactersPlayer1 = new Entity[5];
-    private Entity[] charactersPlayer2 = new Entity[5];
 
     @Override
     public void initialize(URL url, ResourceBundle rb) { 
@@ -116,16 +108,16 @@ public class ChooseCharacterController implements Initializable {
         p1_qty.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 5, 1));
         p2_qty.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 5, 1));
         
-        ObservableList<String> personajeFast = FXCollections.observableArrayList("bird", "girl", "megaman","scott");
-        ObservableList<String> personajeFurious = FXCollections.observableArrayList("bear", "jugger", "caveman", "skeleton");
-        ObservableList<String> personajeSmart = FXCollections.observableArrayList("braid", "detective", "mario","teacher");
+        ObservableList<String> characterFast = FXCollections.observableArrayList("bird", "girl", "megaman","scott");
+        ObservableList<String> characterFurious = FXCollections.observableArrayList("bear", "jugger", "caveman", "skeleton");
+        ObservableList<String> characterSmart = FXCollections.observableArrayList("braid", "detective", "mario","teacher");
 
         //cbx_player1Charact.setValue("Braid");
-        cbx_player1Charact.setItems(personajeFast);
+        cbx_player1Charact.setItems(characterFast);
         cbx_player1Charact.setValue(cbx_player1Charact.getItems().get(0));
 
         //cbx_player2Charact.setValue("Kirby");
-        cbx_player2Charact.setItems(personajeFast);
+        cbx_player2Charact.setItems(characterFast);
         cbx_player2Charact.setValue(cbx_player2Charact.getItems().get(0));
         
         //muestra en el img view una imagen del personaje
@@ -137,7 +129,7 @@ public class ChooseCharacterController implements Initializable {
         p1_fast.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                cbx_player1Charact.setItems(personajeFast);
+                cbx_player1Charact.setItems(characterFast);
                 cbx_player1Charact.setValue(cbx_player1Charact.getItems().get(0));
                 //muestra en el img view una imagen del personaje
                 iv_player1.setImage(new Image("/assets/"+cbx_player1Charact.getItems().get(0)+"1.png"));
@@ -148,7 +140,7 @@ public class ChooseCharacterController implements Initializable {
         p1_furious.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                cbx_player1Charact.setItems(personajeFurious);
+                cbx_player1Charact.setItems(characterFurious);
                 cbx_player1Charact.setValue(cbx_player1Charact.getItems().get(0));
                 //muestra en el img view una imagen del personaje
                 iv_player1.setImage(new Image("/assets/"+cbx_player1Charact.getItems().get(0)+"1.png"));
@@ -159,7 +151,7 @@ public class ChooseCharacterController implements Initializable {
         p1_smart.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                cbx_player1Charact.setItems(personajeSmart);
+                cbx_player1Charact.setItems(characterSmart);
                 cbx_player1Charact.setValue(cbx_player1Charact.getItems().get(0));
                 //muestra en el img view una imagen del personaje
                 iv_player1.setImage(new Image("/assets/"+cbx_player1Charact.getItems().get(0)+"1.png"));
@@ -170,7 +162,7 @@ public class ChooseCharacterController implements Initializable {
         p2_fast.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                cbx_player2Charact.setItems(personajeFast);
+                cbx_player2Charact.setItems(characterFast);
                 cbx_player2Charact.setValue(cbx_player2Charact.getItems().get(0));
                 //muestra en el img view una imagen del personaje
                 iv_player2.setImage(new Image("/assets/"+cbx_player2Charact.getItems().get(0)+"1.png"));
@@ -181,7 +173,7 @@ public class ChooseCharacterController implements Initializable {
         p2_furious.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                cbx_player2Charact.setItems(personajeFurious);
+                cbx_player2Charact.setItems(characterFurious);
                 cbx_player2Charact.setValue(cbx_player2Charact.getItems().get(0));
                 //muestra en el img view una imagen del personaje
                 iv_player2.setImage(new Image("/assets/"+cbx_player2Charact.getItems().get(0)+"1.png"));
@@ -192,7 +184,7 @@ public class ChooseCharacterController implements Initializable {
         p2_smart.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                cbx_player2Charact.setItems(personajeSmart);
+                cbx_player2Charact.setItems(characterSmart);
                 cbx_player2Charact.setValue(cbx_player2Charact.getItems().get(0));
                 //muestra en el img view una imagen del personaje
                 iv_player2.setImage(new Image("/assets/"+cbx_player2Charact.getItems().get(0)+"1.png"));
