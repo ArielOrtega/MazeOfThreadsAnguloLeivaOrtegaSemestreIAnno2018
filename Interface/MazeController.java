@@ -1,5 +1,6 @@
 package Interface;
 
+import domain.EnergyItem;
 import domain.FastCharacter;
 import domain.FuriousCharacter;
 import domain.SmartCharacter;
@@ -9,9 +10,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.BufferOverflowException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -41,10 +42,8 @@ public class MazeController implements Initializable, Runnable {
     private FuriousCharacter fuC;
     private SmartCharacter saC;
     
-    
-    public static List<Integer> path = new ArrayList<Integer>();
-    private int pathIndex;
-    
+    //items
+    EnergyItem item, item2;
 
     @FXML
     private Canvas canvas_maze;
@@ -62,7 +61,15 @@ public class MazeController implements Initializable, Runnable {
             
             this.canvas = new Canvas(canvas_maze.getWidth(), canvas_maze.getHeight());
             this.image = new Image(new FileInputStream("src/assets/Background.png"));
+            
+            //Inicializar items
+            this.item = new EnergyItem(300, 600);
+            this.item.start();
 
+            this.item2 = new EnergyItem(550, 670);
+            this.item2.start();
+            
+            //Inicializar personajes
             this.faC = new FastCharacter(600, 50, 0, "braid");
             this.faC.start();
 
@@ -97,16 +104,19 @@ public class MazeController implements Initializable, Runnable {
                 GraphicsContext gc = this.canvas_maze.getGraphicsContext2D();
                 draw(gc);
             } catch (InterruptedException ex) {
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(MazeController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
 
-    private void draw(GraphicsContext gc) {
+    private void draw(GraphicsContext gc) throws FileNotFoundException {
 
-        for (int i = 0; i < synchronizedB.maze.length; i++) {
-            for (int j = 0; j < synchronizedB.maze[0].length; j++) {
+        //Dibujar laberinto
+        for (int i = 0; i < synchronizedB.maze1.length; i++) {
+            for (int j = 0; j < synchronizedB.maze1[0].length; j++) {
 
-                if (synchronizedB.maze[i][j] == 0 || synchronizedB.maze[i][j] == 2 || synchronizedB.maze[i][j] == 9) {
+                if (synchronizedB.maze1[i][j] == 0 || synchronizedB.maze1[i][j] == 2 || synchronizedB.maze1[i][j] == 9) {
                     gc.setFill(Color.WHITE);
 
                 } else {
@@ -115,18 +125,11 @@ public class MazeController implements Initializable, Runnable {
                 gc.fillRect(i * 55, j * 55, 55, 55);
             }
         }
-/**
-//      draw the path list
-        SearchPath.searchPath(maze, 1, 1, path);
-        pathIndex = path.size() - 2;
-       
-        for (int p = 0; p < path.size(); p += 2) {
-            int pathX = path.get(p);
-            int pathY = path.get(p + 1);
-            gc.fillRect(pathY * 55, pathX * 55, 55, 55);
-            gc.setFill(Color.PINK);
-        }
-**/
+        //Dibujar items
+        gc.drawImage(this.item.getImage(), 60, this.item.getP1());
+        gc.drawImage(this.item2.getImage(), this.item2.getP1(), 60);
+        
+        //Dibujar personajes
         gc.drawImage(this.faC.getImage(), this.faC.getX(), this.faC.getY());
         gc.drawImage(this.fuC.getImage(), this.fuC.getX(), this.fuC.getY());
         gc.drawImage(this.saC.getImage(), this.saC.getX(), this.saC.getY());
