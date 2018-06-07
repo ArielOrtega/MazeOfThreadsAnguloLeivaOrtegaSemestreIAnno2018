@@ -15,6 +15,9 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -29,6 +32,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class MazeController implements Initializable, Runnable {
 
@@ -39,7 +43,7 @@ public class MazeController implements Initializable, Runnable {
     private Image image;
     SynchronizedBuffer synchronizedB = new SynchronizedBuffer();
     //ChooseCharacterController control= new ChooseCharacterController();
-    private boolean pause= false;
+    private boolean pause= false; //controla la accion de pausa para que detenga o siga
 
     //personajes
     private FastCharacter faC;
@@ -60,54 +64,90 @@ public class MazeController implements Initializable, Runnable {
     private Label lb_goBack11;
     @FXML
     private Label lb_pause;
+    @FXML
+    private Label lbl_begin;
+    @FXML
+    private Label lbl_chronometer;
     
+    int miliseconds = 0;
+    int seconds = 0;
+    int minutes = 0;
+    
+    static Timeline clock;
+    //thread = new Thread(this);
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
      
-        try {
-            
-            this.canvas = new Canvas(canvas_maze.getWidth(), canvas_maze.getHeight());
-            this.image = new Image(new FileInputStream("src/assets/Background.png"));
-            
-            //Inicializar items
-            this.item = new EnergyItem(300, 600);
-            this.item.start();
-
-            this.item2 = new EnergyItem(550, 670);
-            this.item2.start();
-            
-            //Inicializar personajes 
-            
-            //Equipo1
-            if (!ChooseCharacterController.getTeamArray1().isEmpty()) {
-                for (int i = 0; i < ChooseCharacterController.getTeamArray1().size(); i++) {
-                    System.out.println("Name " + ChooseCharacterController.getTeamArray1().get(i).getName());
-                    ChooseCharacterController.getTeamArray1().get(i).start();
-                }
-
-            }
-            
-            //Equipo2
-            if (!ChooseCharacterController.getTeamArray2().isEmpty()) {
-                for (int i = 0; i < ChooseCharacterController.getTeamArray2().size(); i++) {
-                    System.out.println("Name " + ChooseCharacterController.getTeamArray2().get(i).getName());
-                    ChooseCharacterController.getTeamArray2().get(i).start();
-                }
-
-            }            
-
-            this.thread = new Thread(this);
-            this.thread.start();
-
-        } catch (FileNotFoundException | BufferOverflowException ex) {
+//        try {
+//            
+//            this.canvas = new Canvas(canvas_maze.getWidth(), canvas_maze.getHeight());
+//            this.image = new Image(new FileInputStream("src/assets/Background.png"));
+//            
+//            //Inicializar items
+//            this.item = new EnergyItem(300, 600);
+//            this.item.start();
+//
+//            this.item2 = new EnergyItem(550, 670);
+//            this.item2.start();
+//            
+//            //Inicializar personajes 
+//            
+//            //Equipo1
+//            if (!ChooseCharacterController.getTeamArray1().isEmpty()) {
+//                for (int i = 0; i < ChooseCharacterController.getTeamArray1().size(); i++) {
+//                    System.out.println("Name " + ChooseCharacterController.getTeamArray1().get(i).getName());
+//                    ChooseCharacterController.getTeamArray1().get(i).start();
+//                }
+//
+//            }
+//            
+//            //Equipo2
+//            if (!ChooseCharacterController.getTeamArray2().isEmpty()) {
+//                for (int i = 0; i < ChooseCharacterController.getTeamArray2().size(); i++) {
+//                    System.out.println("Name " + ChooseCharacterController.getTeamArray2().get(i).getName());
+//                    ChooseCharacterController.getTeamArray2().get(i).start();
+//                }
+//
+//            }            
+//
+//            this.thread = new Thread(this);
+//            this.thread.start();
+//
+//        } catch (FileNotFoundException | BufferOverflowException ex) {
+//        }
+        
+        //timeLine que ayuda a manejar el cronometro
+        clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+        //condicionales para incrementar milisegundos, segundos y minutos respectivamente
+        if(seconds==60){
+           seconds = 0;
+           minutes++;
         }
+        if(miliseconds==99){
+            miliseconds = 0;
+            seconds++;
+        }
+        //condicionales para dar el formato de dos digitos
+        if(minutes<10&&seconds<10){
+            lbl_chronometer.setText("0"+minutes+":0"+seconds+":"+miliseconds);
+        }else if(seconds<10){
+            lbl_chronometer.setText(minutes+":0"+seconds+":"+miliseconds);
+        }else{
+            lbl_chronometer.setText("0"+minutes+":"+seconds+":"+miliseconds);
+        }
+        //se incrementan los milisegundos
+        miliseconds++;
+    
+        }),
+                new KeyFrame(Duration.seconds(0.01))
+        );
+        clock.setCycleCount(Animation.INDEFINITE);
         
     }
 
     @Override
     public void run() {
-        while(!pause){
 
         long start;
         long elapsed;
@@ -115,7 +155,7 @@ public class MazeController implements Initializable, Runnable {
         int fps = 30;
         long time = 1000 / fps;
 
-        while (true) {
+        while (!pause) {
             try {
                 start = System.nanoTime();
                 elapsed = System.nanoTime() - start;
@@ -127,7 +167,6 @@ public class MazeController implements Initializable, Runnable {
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(MazeController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
         }
     }
 
@@ -213,7 +252,81 @@ public class MazeController implements Initializable, Runnable {
     }
 
     @FXML
-    private void pauseAction(MouseEvent event) {
-        pause= true;
+    private void pauseAction(MouseEvent event) throws InterruptedException {
+        if(!pause){
+            clock.pause();
+            pause= true;
+        }else{
+            pause = false;
+            clock.play();
+        }
+    }
+
+    @FXML
+    private void lbl_beginOut(MouseEvent event) {
+        lbl_begin.setScaleX(1);
+        lbl_begin.setScaleY(1);
+    }
+
+    @FXML
+    private void lbl_beginIn(MouseEvent event) {
+        lbl_begin.setScaleX(1.5);
+        lbl_begin.setScaleY(1.5);
+    }
+
+    @FXML
+    private void lbl_beginClicked(MouseEvent event) {
+        try {
+            
+            this.canvas = new Canvas(canvas_maze.getWidth(), canvas_maze.getHeight());
+            this.image = new Image(new FileInputStream("src/assets/Background.png"));
+            
+            //Inicializar items
+            this.item = new EnergyItem(300, 600);
+            this.item.start();
+
+            this.item2 = new EnergyItem(550, 670);
+            this.item2.start();
+            
+            //Inicializar personajes 
+            
+            //Equipo1
+            if (!ChooseCharacterController.getTeamArray1().isEmpty()) {
+                for (int i = 0; i < ChooseCharacterController.getTeamArray1().size(); i++) {
+                    System.out.println("Name " + ChooseCharacterController.getTeamArray1().get(i).getName());
+                    ChooseCharacterController.getTeamArray1().get(i).start();
+                }
+
+            }
+            
+            //Equipo2
+            if (!ChooseCharacterController.getTeamArray2().isEmpty()) {
+                for (int i = 0; i < ChooseCharacterController.getTeamArray2().size(); i++) {
+                    System.out.println("Name " + ChooseCharacterController.getTeamArray2().get(i).getName());
+                    ChooseCharacterController.getTeamArray2().get(i).start();
+                }
+
+            }            
+
+            this.thread = new Thread(this);
+            this.thread.start();
+
+        } catch (FileNotFoundException | BufferOverflowException ex) {
+        }
+        
+        clock.playFromStart();
+        lbl_begin.setDisable(true);
+    }
+
+    @FXML
+    private void lbl_PauseOut(MouseEvent event) {
+        lb_pause.setScaleX(1);
+        lb_pause.setScaleY(1);
+    }
+
+    @FXML
+    private void lbl_PauseIn(MouseEvent event) {
+        lb_pause.setScaleX(1.5);
+        lb_pause.setScaleY(1.5);
     }
 }
