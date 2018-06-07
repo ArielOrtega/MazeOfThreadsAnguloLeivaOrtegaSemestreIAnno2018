@@ -73,45 +73,6 @@ public class Maze2Controller implements Initializable, Runnable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-//        try {
-//            
-//            this.canvas = new Canvas(canvas_maze.getWidth(), canvas_maze.getHeight());
-//            this.image = new Image(new FileInputStream("src/assets/Background.png"));
-//
-//            //Inicializar item
-//            this.item = new EnergyItem(180, 280);
-//            this.item.start();
-//
-//            this.item2 = new EnergyItem(170, 390);
-//            this.item2.start();
-//            
-//            this.item3 = new EnergyItem(65, 300);
-//            this.item3.start();            
-//            
-//            //Inicializar personajes
-//            //Equipo1
-//            if (!ChooseCharacterController.getTeamArray1().isEmpty()) {
-//                for (int i = 0; i < ChooseCharacterController.getTeamArray1().size(); i++) {
-//                    System.out.println("Name " + ChooseCharacterController.getTeamArray1().get(i).getName());
-//                    ChooseCharacterController.getTeamArray1().get(i).start();
-//                }
-//
-//            }
-//            
-//            //Equipo2
-//            if (!ChooseCharacterController.getTeamArray2().isEmpty()) {
-//                for (int i = 0; i < ChooseCharacterController.getTeamArray2().size(); i++) {
-//                    System.out.println("Name " + ChooseCharacterController.getTeamArray2().get(i).getName());
-//                    ChooseCharacterController.getTeamArray2().get(i).start();
-//                }
-//
-//            } 
-//
-//            this.thread = new Thread(this);
-//            this.thread.start();
-//
-//        } catch (FileNotFoundException | BufferOverflowException ex) {
-//        }
 
         //timeLine que ayuda a manejar el cronometro
         clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {

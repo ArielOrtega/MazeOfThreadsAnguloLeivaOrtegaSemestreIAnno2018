@@ -73,49 +73,11 @@ public class MazeController implements Initializable, Runnable {
     int seconds = 0;
     int minutes = 0;
     
-    static Timeline clock;
+    public static Timeline clock;
     //thread = new Thread(this);
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-     
-//        try {
-//            
-//            this.canvas = new Canvas(canvas_maze.getWidth(), canvas_maze.getHeight());
-//            this.image = new Image(new FileInputStream("src/assets/Background.png"));
-//            
-//            //Inicializar items
-//            this.item = new EnergyItem(300, 600);
-//            this.item.start();
-//
-//            this.item2 = new EnergyItem(550, 670);
-//            this.item2.start();
-//            
-//            //Inicializar personajes 
-//            
-//            //Equipo1
-//            if (!ChooseCharacterController.getTeamArray1().isEmpty()) {
-//                for (int i = 0; i < ChooseCharacterController.getTeamArray1().size(); i++) {
-//                    System.out.println("Name " + ChooseCharacterController.getTeamArray1().get(i).getName());
-//                    ChooseCharacterController.getTeamArray1().get(i).start();
-//                }
-//
-//            }
-//            
-//            //Equipo2
-//            if (!ChooseCharacterController.getTeamArray2().isEmpty()) {
-//                for (int i = 0; i < ChooseCharacterController.getTeamArray2().size(); i++) {
-//                    System.out.println("Name " + ChooseCharacterController.getTeamArray2().get(i).getName());
-//                    ChooseCharacterController.getTeamArray2().get(i).start();
-//                }
-//
-//            }            
-//
-//            this.thread = new Thread(this);
-//            this.thread.start();
-//
-//        } catch (FileNotFoundException | BufferOverflowException ex) {
-//        }
         
         //timeLine que ayuda a manejar el cronometro
         clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
@@ -197,7 +159,6 @@ public class MazeController implements Initializable, Runnable {
         //Dibujar items
         gc.drawImage(this.item.getImage(), 60, this.item.getP1());
         gc.drawImage(this.item2.getImage(), this.item2.getP1(), 60);
-        gc.drawImage(this.faC.getImage(), this.faC.getX(), this.faC.getY());
 //        gc.drawImage(this.saC.getImage(), this.saC.getX(), this.saC.getY());
         
         //Dibujar personajes
@@ -210,7 +171,7 @@ public class MazeController implements Initializable, Runnable {
         }
         
         //Equipo2
-        if (!ChooseCharacterController.getTeamArray1().isEmpty()) {
+        if (!ChooseCharacterController.getTeamArray2().isEmpty()) {
             for (int i = 0; i < ChooseCharacterController.getTeamArray2().size(); i++) {
                 gc.drawImage(ChooseCharacterController.getTeamArray2().get(i).getImage(), ChooseCharacterController.getTeamArray2().get(i).getX(), ChooseCharacterController.getTeamArray2().get(i).getY());
             }
@@ -294,9 +255,6 @@ public class MazeController implements Initializable, Runnable {
 
             this.item2 = new EnergyItem(550, 670);
             this.item2.start();
-            
-            this.faC = new FastCharacter(0, 0, 0, "braid");
-            this.faC.start();
             
 //            this.saC = new SmartCharacter(0, 0, 0, "caveman");
 //            this.saC.start();

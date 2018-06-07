@@ -17,8 +17,8 @@
          </font>
       </Label>
       <Separator layoutX="324.0" layoutY="167.0" orientation="VERTICAL" prefHeight="200.0" />
-      <ImageView fx:id="iv_player1" fitHeight="134.0" fitWidth="134.0" layoutX="71.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="iv_player2" fitHeight="134.0" fitWidth="134.0" layoutX="422.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="iv_player1" fitHeight="107.0" fitWidth="111.0" layoutX="113.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="iv_player2" fitHeight="107.0" fitWidth="111.0" layoutX="434.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" />
       <AnchorPane fx:id="cb_furious" layoutX="43.0" layoutY="380.0" prefHeight="236.0" prefWidth="252.0">
          <children>
             <RadioButton fx:id="p1_fast" layoutX="17.0" layoutY="60.0" mnemonicParsing="false" text="Fast" textFill="WHITE">

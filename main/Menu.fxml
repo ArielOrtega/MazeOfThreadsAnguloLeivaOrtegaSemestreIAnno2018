@@ -20,12 +20,12 @@
             <Font name="Open Sans Bold" size="37.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_options" layoutX="103.0" layoutY="410.0" onMouseEntered="#lblOptions" onMouseExited="#lblOptionsOut" text="Options" textFill="WHITE">
+      <Label fx:id="lbl_options" layoutX="103.0" layoutY="410.0" onMouseEntered="#lblOptions" onMouseExited="#lblOptionsOut" text="Options" textFill="WHITE" visible="false">
          <font>
             <Font name="Open Sans Bold" size="30.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_exit" layoutX="103.0" layoutY="529.0" onMouseEntered="#lblExit" onMouseExited="#lblExitOut" text="Exit Game" textFill="WHITE">
+      <Label fx:id="lbl_exit" layoutX="103.0" layoutY="529.0" onMouseClicked="#lbl_exitClicked" onMouseEntered="#lblExit" onMouseExited="#lblExitOut" text="Exit Game" textFill="WHITE">
          <font>
             <Font name="Open Sans Bold" size="21.0" />
          </font>

@@ -12,15 +12,15 @@
          <children>
             <Label fx:id="lb_goBack" layoutX="21.0" layoutY="14.0" onMouseClicked="#goBackAction" prefHeight="29.0" prefWidth="82.0" text="Back">
                <font>
-                  <Font size="14.0" />
+                  <Font name="Oswald RegularItalic" size="17.0" />
                </font>
             </Label>
-            <Label fx:id="lb_goBack1" layoutX="21.0" layoutY="69.0" onMouseClicked="#lbl_pauseClicked" onMouseEntered="#lbl_PauseIn" onMouseExited="#lbl_PauseOut" prefHeight="29.0" prefWidth="82.0" text="Pause">
+            <Label fx:id="lb_goBack1" layoutX="21.0" layoutY="125.0" onMouseClicked="#lbl_pauseClicked" onMouseEntered="#lbl_PauseIn" onMouseExited="#lbl_PauseOut" prefHeight="29.0" prefWidth="82.0" text="Pause">
                <font>
                   <Font name="Oswald RegularItalic" size="21.0" />
                </font>
             </Label>
-            <Label fx:id="lb_goBack11" layoutX="19.0" layoutY="125.0" onMouseClicked="#goBackAction" prefHeight="29.0" prefWidth="89.0" text="Chronometer">
+            <Label fx:id="lb_goBack11" layoutX="19.0" layoutY="125.0" onMouseClicked="#goBackAction" prefHeight="29.0" prefWidth="89.0" text="Chronometer" visible="false">
                <font>
                   <Font size="14.0" />
                </font>

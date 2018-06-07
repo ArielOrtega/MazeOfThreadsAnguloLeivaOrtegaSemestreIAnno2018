@@ -5,6 +5,7 @@
  */
 package main;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -17,6 +18,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import java.io.File;
+import javafx.scene.media.AudioClip;
 
 /**
  * FXML Controller class
@@ -36,7 +41,10 @@ public class MenuController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        //Media sound = new Media(new File("/sound/menu.wav").toURI().toString());
+        AudioClip sound = new AudioClip(this.getClass().getResource("/sound/menu.wav").toString());
+        sound.setVolume(0.2);
+        sound.play();
     }    
 
     @FXML
@@ -44,6 +52,9 @@ public class MenuController implements Initializable {
         //lbl_nGame.setFont(new Font("Open Sans",,45));
         lbl_nGame.setScaleX(1.3);
         lbl_nGame.setScaleY(1.3);
+        AudioClip sound = new AudioClip(this.getClass().getResource("/sound/clickSound.wav").toString());
+        sound.play();
+        
     }
 
     @FXML
@@ -75,6 +86,8 @@ public class MenuController implements Initializable {
     private void lblExit(MouseEvent event) {
         lbl_exit.setScaleX(1.3);
         lbl_exit.setScaleY(1.3);
+        AudioClip sound = new AudioClip(this.getClass().getResource("/sound/clickSound.wav").toString());
+        sound.play();
     }
 
     @FXML
@@ -86,6 +99,11 @@ public class MenuController implements Initializable {
                 app_stage.setScene(home_page_scene);
                 app_stage.show();  
             
+    }
+
+    @FXML
+    private void lbl_exitClicked(MouseEvent event) {
+        System.exit(1);
     }
     
 }

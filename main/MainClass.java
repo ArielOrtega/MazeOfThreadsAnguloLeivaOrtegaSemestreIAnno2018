@@ -1,5 +1,7 @@
 package main;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -17,8 +19,8 @@ public class MainClass extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/Interface/Maze.fxml"));
-//        Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("/Interface/Maze.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
         //Parent root = FXMLLoader.load(getClass().getResource("/Interface/Maze2.fxml"));
        /// Parent root = FXMLLoader.load(getClass().getResource("/Interface/Maze3.fxml"));
         Scene scene = new Scene(root);
@@ -31,6 +33,16 @@ public class MainClass extends Application{
         });
         //primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.show();
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+             @Override
+            public void handle(WindowEvent event) {
+                 try {
+                     stop();
+                 } catch (Exception ex) {
+                     Logger.getLogger(MainClass.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+            }
+         });
     }
     
 }

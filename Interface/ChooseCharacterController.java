@@ -250,7 +250,7 @@ public class ChooseCharacterController implements Initializable {
         for (int i = 0; i < p1Quantity; i++) {
            
             if (p1_fast.isSelected()) {
-               team1.add(new FastCharacter(600, 50, 0, p1Name));
+                   team1.add(new FastCharacter(600, 50, 0, p1Name));
               
             } else if (p1_furious.isSelected()) {
                team1.add(new FuriousCharacter(-50, 500, 0, p1Name));

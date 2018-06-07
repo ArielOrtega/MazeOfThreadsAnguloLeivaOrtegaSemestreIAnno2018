@@ -37,6 +37,20 @@ public class FuriousCharacter extends Entity{
     }
 
     public boolean walking(int fil, int col) throws InterruptedException {
+        
+        if (SynchronizedBuffer.maze1[fil][col] == 2 
+                || SynchronizedBuffer.maze1[fil][col-1]==2
+                || SynchronizedBuffer.maze1[fil][col+1]==2
+                || SynchronizedBuffer.maze1[fil+1][col]==2
+                || SynchronizedBuffer.maze1[fil-1][col]==2) {
+            SynchronizedBuffer.maze1[fil][col] = 0;
+            Thread.sleep(150);
+            super.setImage(sprite.get(1));
+            for (int i = 1; i <= 55; i++) {
+                super.setY(col * i);
+                super.setX(fil * i);
+            }
+        }
 
         Thread.sleep(150);
         int tam = SynchronizedBuffer.maze1.length;
