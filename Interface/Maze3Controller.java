@@ -72,14 +72,23 @@ public class Maze3Controller implements Initializable, Runnable {
             this.item3.start();  
             
             //Inicializar personajes
-            this.faC = new FastCharacter(600, 50, 0, "braid");
-            this.faC.start();
+            //Equipo1
+            if (!ChooseCharacterController.getTeamArray1().isEmpty()) {
+                for (int i = 0; i < ChooseCharacterController.getTeamArray1().size(); i++) {
+                    System.out.println("Name " + ChooseCharacterController.getTeamArray1().get(i).getName());
+                    ChooseCharacterController.getTeamArray1().get(i).start();
+                }
 
-            this.fuC = new FuriousCharacter(-50, 500, 0);
-            this.fuC.start();
+            }
+            
+            //Equipo2
+            if (!ChooseCharacterController.getTeamArray2().isEmpty()) {
+                for (int i = 0; i < ChooseCharacterController.getTeamArray2().size(); i++) {
+                    System.out.println("Name " + ChooseCharacterController.getTeamArray2().get(i).getName());
+                    ChooseCharacterController.getTeamArray2().get(i).start();
+                }
 
-            this.saC = new SmartCharacter(450, 370, 2);
-            this.saC.start();
+            } 
 
             this.thread = new Thread(this);
             this.thread.start();
@@ -135,9 +144,21 @@ public class Maze3Controller implements Initializable, Runnable {
         gc.drawImage(this.item3.getImage(),this.item3.getP1(), 390);      
         
         //Dibujar personajes
-        gc.drawImage(this.faC.getImage(), this.faC.getX(), this.faC.getY());
-        gc.drawImage(this.fuC.getImage(), this.fuC.getX(), this.fuC.getY());
-        gc.drawImage(this.saC.getImage(), this.saC.getX(), this.saC.getY());
+        //Equipo1
+        if (!ChooseCharacterController.getTeamArray1().isEmpty()) {
+            for (int i = 0; i < ChooseCharacterController.getTeamArray1().size(); i++) {
+                gc.drawImage(ChooseCharacterController.getTeamArray1().get(i).getImage(), ChooseCharacterController.getTeamArray1().get(i).getX(), ChooseCharacterController.getTeamArray1().get(i).getY());
+            }
+
+        }
+        
+        //Equipo2
+        if (!ChooseCharacterController.getTeamArray1().isEmpty()) {
+            for (int i = 0; i < ChooseCharacterController.getTeamArray2().size(); i++) {
+                gc.drawImage(ChooseCharacterController.getTeamArray2().get(i).getImage(), ChooseCharacterController.getTeamArray2().get(i).getX(), ChooseCharacterController.getTeamArray2().get(i).getY());
+            }
+
+        }
         
     }
 

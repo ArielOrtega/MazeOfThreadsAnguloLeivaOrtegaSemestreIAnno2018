@@ -11,7 +11,7 @@ public class FastCharacter extends Entity {
     private String name;
 
     public FastCharacter(int x, int y, int num, String name) throws FileNotFoundException {
-        super(x,y,num);
+        super(x,y,num,name);
         this.name= name;
         setSprite();
     }
@@ -19,7 +19,7 @@ public class FastCharacter extends Entity {
     public void setSprite() throws FileNotFoundException{
         ArrayList<Image> sprite = super.getSprite();
         for(int i = 1; i < 5; i++){
-            sprite.add(new Image(new FileInputStream("src/assets/"+name+""+i+".png")));
+            sprite.add(new Image(new FileInputStream("src/assets/"+super.getImgName()+""+i+".png")));
         }
         super.setSprite(sprite);
     }
@@ -34,7 +34,7 @@ public class FastCharacter extends Entity {
             try {
                 super.setX(newX+=5);
                 super.setImage(sprite.get(imageNum++));
-                Thread.sleep(50);
+                Thread.sleep((long) Math.floor(Math.random()*(5-20+1)+20));
 //                super.setX(newX++);
 //                Thread.sleep(500);
 //                super.setX(300);
@@ -51,4 +51,11 @@ public class FastCharacter extends Entity {
             catch (InterruptedException ex) {}
         }
     }
+
+    @Override
+    public String toString() {
+        return "FastCharacter{" + "name=" + name + '}';
+    }
+    
+    
 }

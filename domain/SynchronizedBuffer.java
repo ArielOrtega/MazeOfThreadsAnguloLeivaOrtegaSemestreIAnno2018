@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.ArrayList;
+
 
 
 public class SynchronizedBuffer implements Buffer
@@ -7,6 +9,7 @@ public class SynchronizedBuffer implements Buffer
 
     private int buffer = -1; // shared by producer and consumer threads
     private int occupiedBufferCount = 0; // count of occupied buffers
+    
     //Matriz para el laberinto uno
     public int[][] maze1 = 
     {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},

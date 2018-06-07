@@ -1,6 +1,7 @@
 package Interface;
 
 import domain.EnergyItem;
+import domain.Entity;
 import domain.FastCharacter;
 import domain.FuriousCharacter;
 import domain.SmartCharacter;
@@ -10,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.BufferOverflowException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,6 +38,8 @@ public class MazeController implements Initializable, Runnable {
     private Canvas canvas;
     private Image image;
     SynchronizedBuffer synchronizedB = new SynchronizedBuffer();
+    //ChooseCharacterController control= new ChooseCharacterController();
+    private boolean pause= false;
 
     //personajes
     private FastCharacter faC;
@@ -44,19 +48,23 @@ public class MazeController implements Initializable, Runnable {
     
     //items
     EnergyItem item, item2;
+    
+    //equipos
+    ArrayList<Entity> team1, team2;
 
     @FXML
     private Canvas canvas_maze;
     @FXML
     private Label lb_goBack;
     @FXML
-    private Label lb_goBack1;
-    @FXML
     private Label lb_goBack11;
+    @FXML
+    private Label lb_pause;
     
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+     
         try {
             
             this.canvas = new Canvas(canvas_maze.getWidth(), canvas_maze.getHeight());
@@ -69,25 +77,37 @@ public class MazeController implements Initializable, Runnable {
             this.item2 = new EnergyItem(550, 670);
             this.item2.start();
             
-            //Inicializar personajes
-            this.faC = new FastCharacter(600, 50, 0, "braid");
-            this.faC.start();
+            //Inicializar personajes 
+            
+            //Equipo1
+            if (!ChooseCharacterController.getTeamArray1().isEmpty()) {
+                for (int i = 0; i < ChooseCharacterController.getTeamArray1().size(); i++) {
+                    System.out.println("Name " + ChooseCharacterController.getTeamArray1().get(i).getName());
+                    ChooseCharacterController.getTeamArray1().get(i).start();
+                }
 
-            this.fuC = new FuriousCharacter(-50, 500, 0);
-            this.fuC.start();
+            }
+            
+            //Equipo2
+            if (!ChooseCharacterController.getTeamArray2().isEmpty()) {
+                for (int i = 0; i < ChooseCharacterController.getTeamArray2().size(); i++) {
+                    System.out.println("Name " + ChooseCharacterController.getTeamArray2().get(i).getName());
+                    ChooseCharacterController.getTeamArray2().get(i).start();
+                }
 
-            this.saC = new SmartCharacter(450, 370, 2);
-            this.saC.start();
+            }            
 
             this.thread = new Thread(this);
             this.thread.start();
 
         } catch (FileNotFoundException | BufferOverflowException ex) {
         }
+        
     }
 
     @Override
     public void run() {
+        while(!pause){
 
         long start;
         long elapsed;
@@ -107,6 +127,7 @@ public class MazeController implements Initializable, Runnable {
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(MazeController.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
         }
     }
 
@@ -130,9 +151,21 @@ public class MazeController implements Initializable, Runnable {
         gc.drawImage(this.item2.getImage(), this.item2.getP1(), 60);
         
         //Dibujar personajes
-        gc.drawImage(this.faC.getImage(), this.faC.getX(), this.faC.getY());
-        gc.drawImage(this.fuC.getImage(), this.fuC.getX(), this.fuC.getY());
-        gc.drawImage(this.saC.getImage(), this.saC.getX(), this.saC.getY());
+        //Equipo1
+        if (!ChooseCharacterController.getTeamArray1().isEmpty()) {
+            for (int i = 0; i < ChooseCharacterController.getTeamArray1().size(); i++) {
+                gc.drawImage(ChooseCharacterController.getTeamArray1().get(i).getImage(), ChooseCharacterController.getTeamArray1().get(i).getX(), ChooseCharacterController.getTeamArray1().get(i).getY());
+            }
+
+        }
+        
+        //Equipo2
+        if (!ChooseCharacterController.getTeamArray1().isEmpty()) {
+            for (int i = 0; i < ChooseCharacterController.getTeamArray2().size(); i++) {
+                gc.drawImage(ChooseCharacterController.getTeamArray2().get(i).getImage(), ChooseCharacterController.getTeamArray2().get(i).getX(), ChooseCharacterController.getTeamArray2().get(i).getY());
+            }
+
+        }
 
     }
 
@@ -177,5 +210,10 @@ public class MazeController implements Initializable, Runnable {
                 app_stage.hide(); //optional
                 app_stage.setScene(home_page_scene);
                 app_stage.show();  
+    }
+
+    @FXML
+    private void pauseAction(MouseEvent event) {
+        pause= true;
     }
 }
