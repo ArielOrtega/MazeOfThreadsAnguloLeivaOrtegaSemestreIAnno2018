@@ -9,15 +9,15 @@ import javafx.scene.image.Image;
 
 public class FuriousCharacter extends Entity{
 
-    public FuriousCharacter(int x, int y, int num) throws FileNotFoundException {
-        super(x,y,num);
+    public FuriousCharacter(int x, int y, int num, String name) throws FileNotFoundException {
+        super(x,y,num,name);
         setSprite();
     }
     
     public void setSprite() throws FileNotFoundException{
         ArrayList<Image> sprite = super.getSprite();
         for(int i = 1; i < 5; i++){
-            sprite.add(new Image(new FileInputStream("src/assets/jugger"+i+".png")));
+            sprite.add(new Image(new FileInputStream("src/assets/"+super.getImgName()+""+i+".png")));
         }
         super.setSprite(sprite);
     }

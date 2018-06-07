@@ -13,7 +13,7 @@ public class FastCharacter extends Entity {
     SynchronizedBuffer synchronizedB;
 
     public FastCharacter(int x, int y, int num, String name) throws FileNotFoundException {
-        super(x, y, num);
+        super(x, y, num, name);
         this.name = name;
         this.synchronizedB = new SynchronizedBuffer();
 //        this.mazeT = maze;
