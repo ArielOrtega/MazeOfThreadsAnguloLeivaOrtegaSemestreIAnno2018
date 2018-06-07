@@ -8,7 +8,7 @@ public class SynchronizedBuffer implements Buffer
     private int buffer = -1; // shared by producer and consumer threads
     private int occupiedBufferCount = 0; // count of occupied buffers
     //Matriz para el laberinto uno
-    public int[][] maze1 = 
+    public static int[][] maze1 = 
     {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {1 ,0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
     {1 ,0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1},

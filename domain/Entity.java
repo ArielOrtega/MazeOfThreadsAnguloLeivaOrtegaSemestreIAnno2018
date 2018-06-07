@@ -14,7 +14,7 @@ public class Entity extends Thread{
     private int y;
     private int imgNum;
     private Image image;
-    private ArrayList<Image> sprite;
+    ArrayList<Image> sprite;
 
     public Entity(int x, int y, int imgNum) {
         this.x = x;
