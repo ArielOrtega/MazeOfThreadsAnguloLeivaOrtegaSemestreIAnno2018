@@ -41,7 +41,7 @@ public class FastCharacter extends Entity {
     public boolean walking(int fil, int col) throws InterruptedException {
 
         
-        Thread.sleep(150);
+        Thread.sleep(10);//150
 
         int tam = SynchronizedBuffer.maze1.length;
 
@@ -61,8 +61,8 @@ public class FastCharacter extends Entity {
         }
         super.setImage(sprite.get(contador++));
         for (int i = 1; i <= 55; i++) {
-            super.setY(col * i);
-            super.setX(fil * i);
+            super.setY(col *i);
+            super.setX(fil *i);
         }
 
         SynchronizedBuffer.maze1[fil][col] = 2;
@@ -98,17 +98,20 @@ public class FastCharacter extends Entity {
             walking(fil, col - 1);
 
         }
+        if(SynchronizedBuffer.maze1[fil-1][col] == 10){
+            return true;
+        }
 
         SynchronizedBuffer.maze1[fil][col] = 0;
         Thread.sleep(150);
         if (contador == 3) {
             contador = 1;
         }
-        Thread.sleep(150);
+        Thread.sleep(10);//150
         super.setImage(sprite.get(contador++));
         for (int i = 1; i <= 55; i++) {
-            super.setY(col * i);
-            super.setX(fil * i);
+            super.setY(col *i);
+            super.setX(fil *i);
         }
 
         return false;
