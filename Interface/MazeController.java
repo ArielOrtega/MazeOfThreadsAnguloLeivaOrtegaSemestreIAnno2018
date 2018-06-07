@@ -173,14 +173,23 @@ public class MazeController implements Initializable, Runnable {
     private void draw(GraphicsContext gc) throws FileNotFoundException {
 
         //Dibujar laberinto
-        for (int i = 0; i < synchronizedB.maze1.length; i++) {
-            for (int j = 0; j < synchronizedB.maze1[0].length; j++) {
+        for (int i = 0; i < SynchronizedBuffer.maze1.length; i++) {
+            for (int j = 0; j < SynchronizedBuffer.maze1[0].length; j++) {
 
-                if (synchronizedB.maze1[i][j] == 0 || synchronizedB.maze1[i][j] == 2 || synchronizedB.maze1[i][j] == 9) {
-                    gc.setFill(Color.WHITE);
-
-                } else {
-                    gc.setFill(Color.CADETBLUE);
+                switch (SynchronizedBuffer.maze1[i][j]) {
+                    case 0:
+                    case 2:
+                        gc.setFill(Color.WHITE);
+                        break;
+                    case 3:
+                    case 1:
+                        gc.setFill(Color.CADETBLUE);
+                        break;
+                    case 10:
+                        gc.setFill(Color.ROSYBROWN);
+                        break;
+                    default:
+                        break;
                 }
                 gc.fillRect(i * 55, j * 55, 55, 55);
             }
@@ -188,6 +197,8 @@ public class MazeController implements Initializable, Runnable {
         //Dibujar items
         gc.drawImage(this.item.getImage(), 60, this.item.getP1());
         gc.drawImage(this.item2.getImage(), this.item2.getP1(), 60);
+        gc.drawImage(this.faC.getImage(), this.faC.getX(), this.faC.getY());
+//        gc.drawImage(this.saC.getImage(), this.saC.getX(), this.saC.getY());
         
         //Dibujar personajes
         //Equipo1
@@ -220,23 +231,19 @@ public class MazeController implements Initializable, Runnable {
 
         int contador = 0;
         String result = "";
-        if (synchronizedB.maze[xIndex][yIndex] == 1) {
-            synchronizedB.maze[xIndex][yIndex] = 0;
-            for (int i = 0; i < synchronizedB.maze.length; i++) {
-                for (int j = 0; j < synchronizedB.maze[0].length; j++) {
-                    
-                    if(contador == 13){
-                        result += "\n";
-                        contador=0;
-                    }
-                    result += synchronizedB.maze[i][j];
-                    contador++;
-                }
-                
-            }
-            System.out.println(result);
-        } else {
-            synchronizedB.maze[xIndex][yIndex] = 1;
+        switch (SynchronizedBuffer.maze1[xIndex][yIndex]) {
+            case 0:
+                SynchronizedBuffer.maze1[xIndex][yIndex] = 1;                
+                break;
+            case 1:
+                SynchronizedBuffer.maze1[xIndex][yIndex] = 0;
+                break;
+            case 3:
+                SynchronizedBuffer.maze1[xIndex][yIndex] = 3;
+                break;            
+            case 10:
+                SynchronizedBuffer.maze1[xIndex][yIndex] = 10;
+                break;
         }
         
     }//end handleClick
@@ -287,6 +294,12 @@ public class MazeController implements Initializable, Runnable {
 
             this.item2 = new EnergyItem(550, 670);
             this.item2.start();
+            
+            this.faC = new FastCharacter(0, 0, 0, "braid");
+            this.faC.start();
+            
+//            this.saC = new SmartCharacter(0, 0, 0, "caveman");
+//            this.saC.start();
             
             //Inicializar personajes 
             
